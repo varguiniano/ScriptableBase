@@ -8,7 +8,7 @@ namespace ScriptableObjects.Primitives
     /// <summary>
     /// Scriptable object that holds a float.
     /// </summary>
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Scriptable Objects/Float")]
     public class FloatVariable : Variable<float>
     {
     }
