@@ -1,14 +1,14 @@
 using System;
-using ScriptableObjects.Core;
+using ScriptableCore.Core;
 using UnityEngine;
 
-namespace ScriptableObjects.DataStructures
+namespace ScriptableCore.DataStructures
 {
     /// <inheritdoc />
     /// <summary>
     /// Scriptable object that holds a Vector3.
     /// </summary>
-    [CreateAssetMenu(menuName = "Scriptable Objects/Vector3")]
+    [CreateAssetMenu(menuName = "Scriptable Core/Vector3")]
     public class Vector3Variable : Variable<Vector3>
     {
     }

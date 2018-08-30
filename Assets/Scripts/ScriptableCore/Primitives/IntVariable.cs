@@ -1,14 +1,14 @@
 using System;
-using ScriptableObjects.Core;
+using ScriptableCore.Core;
 using UnityEngine;
 
-namespace ScriptableObjects.Primitives
+namespace ScriptableCore.Primitives
 {
     /// <inheritdoc />
     /// <summary>
     /// Scriptable object that holds an int.
     /// </summary>
-    [CreateAssetMenu(menuName = "Scriptable Objects/Int")]
+    [CreateAssetMenu(menuName = "Scriptable Core/Int")]
     public class IntVariable : Variable<int>
     {
     }

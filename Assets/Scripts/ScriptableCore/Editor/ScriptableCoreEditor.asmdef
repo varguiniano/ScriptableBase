@@ -1,0 +1,12 @@
+{
+    "name": "ScriptableCoreEditor",
+    "references": [
+        "ScriptableCore"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

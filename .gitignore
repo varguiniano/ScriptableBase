@@ -17,3 +17,5 @@ Assets/Plugins/
 Assets/Scenes.meta
 Assets/Scenes/
 Assets/Scripts/Test/
+ScriptableCore.csproj
+ScriptableCoreEditor.csproj

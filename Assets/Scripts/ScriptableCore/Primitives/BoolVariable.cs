@@ -1,14 +1,14 @@
 using System;
-using ScriptableObjects.Core;
+using ScriptableCore.Core;
 using UnityEngine;
 
-namespace ScriptableObjects.Primitives
+namespace ScriptableCore.Primitives
 {
     /// <inheritdoc />
     /// <summary>
     /// Scriptable object that holds a bool.
     /// </summary>
-    [CreateAssetMenu(menuName = "Scriptable Objects/Bool")]
+    [CreateAssetMenu(menuName = "Scriptable Core/Bool")]
     public class BoolVariable : Variable<float>
     {
     }

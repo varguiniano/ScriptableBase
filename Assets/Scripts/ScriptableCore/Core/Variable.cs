@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ScriptableObjects.Core
+namespace ScriptableCore.Core
 {
     /// <inheritdoc />
     /// <summary>

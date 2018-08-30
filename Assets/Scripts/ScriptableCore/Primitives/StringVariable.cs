@@ -1,14 +1,14 @@
 using System;
-using ScriptableObjects.Core;
+using ScriptableCore.Core;
 using UnityEngine;
 
-namespace ScriptableObjects.Primitives
+namespace ScriptableCore.Primitives
 {
     /// <inheritdoc />
     /// <summary>
     /// Scriptable object that holds a string.
     /// </summary>
-    [CreateAssetMenu(menuName = "Scriptable Objects/String")]
+    [CreateAssetMenu(menuName = "Scriptable Core/String")]
     public class StringVariable : Variable<string>
     {
     }

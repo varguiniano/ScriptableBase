@@ -1,7 +1,8 @@
-﻿using UnityEditor;
+﻿using ScriptableCore.Core;
+using UnityEditor;
 using UnityEngine;
 
-namespace ScriptableObjects.Core.Editor
+namespace ScriptableCore.Editor.Core
 {
     /// <inheritdoc />
     /// <summary>
