@@ -18,6 +18,11 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         private Language language;
 
         /// <summary>
+        /// Flag to know if we are in json mode or normal edition mode.
+        /// </summary>
+        private bool inJsonMode;
+
+        /// <summary>
         /// Field to store a new Id.
         /// </summary>
         private string newId;
@@ -49,6 +54,40 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
 
             language.LanguageId = EditorGUILayout.TextField("Language ID", language.LanguageId);
 
+            if (GUILayout.Button(inJsonMode ? "Back to inspector edition" : "Json operations"))
+                inJsonMode = !inJsonMode;
+
+            if (inJsonMode)
+                JsonMode();
+            else
+                WordEditor();
+        }
+
+        /// <summary>
+        /// Edition of the language via json.
+        /// </summary>
+        private void JsonMode()
+        {
+            EditorGUILayout.HelpBox(
+                "Remember to load from json after editing the file and that loading from json will completely override the language.",
+                MessageType.Warning);
+            EditorGUILayout.HelpBox("Oh, and you'll probably need to autoindent the json to understand anything.",
+                MessageType.Info);
+            
+            GUILayout.BeginHorizontal();
+            {
+                if(GUILayout.Button("Edit json")) LanguageJsonHelper.OpenFileForEdition(language);
+                if (GUILayout.Button("Load from json")) LanguageJsonHelper.LoadFromJson(ref language);
+            }
+            GUILayout.EndHorizontal();
+            GetEditableCopy();
+        }
+
+        /// <summary>
+        /// Displays the interface for editing the words in the language.
+        /// </summary>
+        private void WordEditor()
+        {
             GUILayout.Label("Words");
 
             var list = language.GetAllWords();
@@ -72,12 +111,16 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                                 !string.IsNullOrWhiteSpace(editableList[index].Word) &&
                                 (editableList[index].Id != pair.Id && !language.ContainsWord(editableList[index].Id) ||
                                  editableList[index].Word != pair.Word))
+                            {
                                 language.UpdateLanguage(editableList);
+                                LanguageJsonHelper.SaveLanguageToJson(language);
+                            }
 
                             if (GUILayout.Button("Delete", GUILayout.Width(Screen.width * .2f)))
                             {
                                 language.RemoveWord(pair.Id);
                                 elementRemoved = true;
+                                LanguageJsonHelper.SaveLanguageToJson(language);
                             }
                         }
                         EditorGUILayout.EndHorizontal();
@@ -103,6 +146,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                         newId = "";
                         newWord = "";
                         GetEditableCopy();
+                        LanguageJsonHelper.SaveLanguageToJson(language);
                     }
                 }
                 EditorGUI.EndDisabledGroup();

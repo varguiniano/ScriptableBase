@@ -10,6 +10,7 @@ namespace Varguiniano.ScriptableCore.Localization
     /// Scriptable object that holds the definition of a language.
     /// </summary>
     [CreateAssetMenu(menuName = "Scriptable Core/Language")]
+    [Serializable]
     public class Language : ScriptableObject
     {
         #region Variables
@@ -23,6 +24,10 @@ namespace Varguiniano.ScriptableCore.Localization
         /// Actual language definition.
         /// </summary>
         public List<IdWordPair> Words = new List<IdWordPair>();
+
+        #endregion
+
+        #region Static Functions
 
         #endregion
 
@@ -73,11 +78,9 @@ namespace Varguiniano.ScriptableCore.Localization
         {
             foreach (var pair in Words)
             {
-                if (pair.Id.Equals(id))
-                {
-                    Words.Remove(pair);
-                    return true;
-                }
+                if (!pair.Id.Equals(id)) continue;
+                Words.Remove(pair);
+                return true;
             }
             return false;
         }
@@ -100,7 +103,7 @@ namespace Varguiniano.ScriptableCore.Localization
 
         #endregion
 
-        #region Dictionary-like Functions
+        #region Other Functions
 
         /// <summary>
         /// Function to know if the language contains a word given its id.
