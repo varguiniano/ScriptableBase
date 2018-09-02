@@ -19,3 +19,5 @@ Assets/Scenes/
 Assets/Scripts/Test/
 ScriptableCore.csproj
 ScriptableCoreEditor.csproj
+Assets/Scripts/Test.meta
+ScriptableBase.sln.DotSettings.user

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ScriptableCore.Events
+namespace Varguiniano.ScriptableCore.Events
 {
     /// <inheritdoc />
     /// <summary>

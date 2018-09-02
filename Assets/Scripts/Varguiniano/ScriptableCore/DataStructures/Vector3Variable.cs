@@ -1,8 +1,8 @@
 using System;
-using ScriptableCore.Core;
 using UnityEngine;
+using Varguiniano.ScriptableCore.Core;
 
-namespace ScriptableCore.DataStructures
+namespace Varguiniano.ScriptableCore.DataStructures
 {
     /// <inheritdoc />
     /// <summary>

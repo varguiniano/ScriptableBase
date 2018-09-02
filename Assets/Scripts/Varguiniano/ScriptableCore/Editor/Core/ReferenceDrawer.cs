@@ -1,8 +1,8 @@
-﻿using ScriptableCore.Core;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using Varguiniano.ScriptableCore.Core;
 
-namespace ScriptableCore.Editor.Core
+namespace Varguiniano.ScriptableCore.Editor.Core
 {
     /// <inheritdoc />
     /// <summary>

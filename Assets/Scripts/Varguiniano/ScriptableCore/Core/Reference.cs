@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ScriptableCore.Core
+namespace Varguiniano.ScriptableCore.Core
 {
     /// <inheritdoc />
     /// <summary>
