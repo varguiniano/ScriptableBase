@@ -9,8 +9,7 @@ namespace Varguiniano.ScriptableCore.Localization
     /// <summary>
     /// Scriptable object that holds the definition of a language.
     /// </summary>
-    [CreateAssetMenu(menuName = "Scriptable Core/Language")]
-    [Serializable]
+    [CreateAssetMenu(menuName = "Scriptable Core/Language/Language")]
     public class Language : ScriptableObject
     {
         #region Variables

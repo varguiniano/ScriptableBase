@@ -85,6 +85,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                 if (GUILayout.Button("Edit json")) LanguageJsonHelper.OpenFileForEdition(language);
                 if (GUILayout.Button("Load from json"))
                     jsonOk = LanguageJsonHelper.LoadFromJson(ref language);
+                EditorUtility.SetDirty(language);
             }
             GUILayout.EndHorizontal();
             if (!jsonOk)
@@ -132,6 +133,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                                     language.UpdateLanguage(editableList);
                                     LanguageJsonHelper.SaveLanguageToJson(language);
                                     GetEditableCopy();
+                                    EditorUtility.SetDirty(language);
                                 }
                             }
                             EditorGUI.EndDisabledGroup();
@@ -141,13 +143,18 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                                 language.RemoveWord(pair.Id);
                                 elementRemoved = true;
                                 LanguageJsonHelper.SaveLanguageToJson(language);
+                                EditorUtility.SetDirty(language);
                             }
                         }
                         EditorGUILayout.EndHorizontal();
                         WordEditorErrorDisplay(editableList[index].Id, editableList[index].Word, pair.Id);
                     }
 
-                    if (elementRemoved) GetEditableCopy();
+                    if (elementRemoved)
+                    {
+                        GetEditableCopy();
+                        EditorUtility.SetDirty(language);
+                    }
                 }
                 EditorGUILayout.EndVertical();
             }
@@ -168,6 +175,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                         newWord = "";
                         GetEditableCopy();
                         LanguageJsonHelper.SaveLanguageToJson(language);
+                        EditorUtility.SetDirty(language);
                     }
                 }
                 EditorGUI.EndDisabledGroup();
@@ -177,8 +185,10 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
             WordEditorErrorDisplay(newId, newWord);
 
 
-            if (GUILayout.Button("Clear all Words"))
-                language.Clear();
+            if (!GUILayout.Button("Clear all Words")) return;
+            language.Clear();
+            EditorUtility.SetDirty(language);
+            GetEditableCopy();
         }
 
         /// <summary>
