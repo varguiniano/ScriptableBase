@@ -14,7 +14,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         /// <summary>
         /// Json file path.
         /// </summary>
-        private const string FilePath = "/Language/Json/";
+        private const string FilePath = "/Json/";
 
         /// <summary>
         /// Json extention.
@@ -70,6 +70,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         /// <param name="language">The given language.</param>
         /// <returns>The path for that language.</returns>
         private static string GetPath(Language language) =>
-            Application.dataPath + FilePath + language.LanguageId + JsonExtention;
+            Directory.GetParent(AssetDatabase.GetAssetPath(language)).FullName + FilePath +
+            language.LanguageId + JsonExtention;
     }
 }

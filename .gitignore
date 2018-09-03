@@ -16,6 +16,7 @@ Assets/Scenes/
 Assets/Scripts/Test/
 ScriptableCore.csproj
 ScriptableCoreEditor.csproj
+Sample.csproj
 Assets/Scripts/Test.meta
 ScriptableBase.sln.DotSettings.user
 ProjectSettings/UnityConnectSettings.asset
@@ -32,3 +33,4 @@ ProjectSettings/QualitySettings.asset
 ProjectSettings/PresetManager.asset
 ProjectSettings/TagManager.asset
 ProjectSettings/AudioManager.asset
+ProjectSettings/NetworkManager.asset

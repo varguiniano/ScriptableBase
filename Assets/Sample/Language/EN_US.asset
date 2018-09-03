@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LanguageId: EN_US
   Words:
-  - Id: start
-    Word: Start
-  - Id: end
-    Word: End
+  - Id: example
+    Word: Example
+  - Id: another_example
+    Word: Another example

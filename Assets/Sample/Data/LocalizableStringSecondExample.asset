@@ -8,12 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede8f5a53f3faaa40ad12322e69044e8, type: 3}
-  m_Name: ES_ES
+  m_Script: {fileID: 11500000, guid: 0a83b71a89ae40a99951d5a0e87374bb, type: 3}
+  m_Name: LocalizableStringSecondExample
   m_EditorClassIdentifier: 
-  LanguageId: ES_ES
-  Words:
-  - Id: start
-    Word: Comenzar
-  - Id: end
-    Word: Terminar
+  Value: 
+  LanguageManager: {fileID: 0}

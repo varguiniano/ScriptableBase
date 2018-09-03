@@ -1,0 +1,10 @@
+{
+    "name": "Sample",
+    "references": [
+        "ScriptableCore"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
