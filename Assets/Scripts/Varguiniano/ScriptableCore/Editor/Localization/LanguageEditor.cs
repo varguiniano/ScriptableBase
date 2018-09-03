@@ -38,6 +38,11 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         private List<IdWordPair> editableList;
 
         /// <summary>
+        /// Flag to know if the json has been correctly loaded.
+        /// </summary>
+        private bool jsonOk = true;
+
+        /// <summary>
         /// Current position of the scroll view.
         /// </summary>
         private Vector2 scrollPos;
@@ -53,6 +58,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
             if (editableList == null) GetEditableCopy();
 
             language.LanguageId = EditorGUILayout.TextField("Language ID", language.LanguageId);
+
 
             if (GUILayout.Button(inJsonMode ? "Back to inspector edition" : "Json operations"))
                 inJsonMode = !inJsonMode;
@@ -73,13 +79,17 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                 MessageType.Warning);
             EditorGUILayout.HelpBox("Oh, and you'll probably need to autoindent the json to understand anything.",
                 MessageType.Info);
-            
+
             GUILayout.BeginHorizontal();
             {
-                if(GUILayout.Button("Edit json")) LanguageJsonHelper.OpenFileForEdition(language);
-                if (GUILayout.Button("Load from json")) LanguageJsonHelper.LoadFromJson(ref language);
+                if (GUILayout.Button("Edit json")) LanguageJsonHelper.OpenFileForEdition(language);
+                if (GUILayout.Button("Load from json"))
+                    jsonOk = LanguageJsonHelper.LoadFromJson(ref language);
             }
             GUILayout.EndHorizontal();
+            if (!jsonOk)
+                EditorGUILayout.HelpBox("The file you selected is not a language json file.", MessageType.Error);
+
             GetEditableCopy();
         }
 
@@ -88,11 +98,14 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         /// </summary>
         private void WordEditor()
         {
+            EditorGUILayout.HelpBox("The json file is automatically updated when editing in this interface.",
+                MessageType.Info);
+
             GUILayout.Label("Words");
 
             var list = language.GetAllWords();
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUIStyle.none, "verticalScrollbar",
-                GUILayout.Height(700));
+                GUILayout.Height(Screen.height * .65f));
             {
                 EditorGUILayout.BeginVertical();
                 {
@@ -103,20 +116,27 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                         EditorGUILayout.BeginHorizontal();
                         {
                             editableList[index].Id = EditorGUILayout.TextField("", editableList[index].Id,
-                                GUILayout.Width(Screen.width * .2f));
+                                GUILayout.Width(Screen.width * .1f));
                             editableList[index].Word = EditorGUILayout.TextArea(editableList[index].Word,
                                 GUILayout.Width(Screen.width * .6f));
 
-                            if (!string.IsNullOrWhiteSpace(editableList[index].Id) &&
-                                !string.IsNullOrWhiteSpace(editableList[index].Word) &&
-                                (editableList[index].Id != pair.Id && !language.ContainsWord(editableList[index].Id) ||
-                                 editableList[index].Word != pair.Word))
+                            EditorGUI.BeginDisabledGroup(string.IsNullOrWhiteSpace(editableList[index].Id) ||
+                                                         string.IsNullOrWhiteSpace(editableList[index].Word) ||
+                                                         pair.Id != editableList[index].Id &&
+                                                         language.ContainsWord(editableList[index].Id) ||
+                                                         pair.Id == editableList[index].Id &&
+                                                         pair.Word == editableList[index].Word);
                             {
-                                language.UpdateLanguage(editableList);
-                                LanguageJsonHelper.SaveLanguageToJson(language);
+                                if (GUILayout.Button("Save", GUILayout.Width(Screen.width * .1f)))
+                                {
+                                    language.UpdateLanguage(editableList);
+                                    LanguageJsonHelper.SaveLanguageToJson(language);
+                                    GetEditableCopy();
+                                }
                             }
+                            EditorGUI.EndDisabledGroup();
 
-                            if (GUILayout.Button("Delete", GUILayout.Width(Screen.width * .2f)))
+                            if (GUILayout.Button("Delete", GUILayout.Width(Screen.width * .1f)))
                             {
                                 language.RemoveWord(pair.Id);
                                 elementRemoved = true;
@@ -124,6 +144,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                             }
                         }
                         EditorGUILayout.EndHorizontal();
+                        WordEditorErrorDisplay(editableList[index].Id, editableList[index].Word, pair.Id);
                     }
 
                     if (elementRemoved) GetEditableCopy();
@@ -134,7 +155,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
 
             EditorGUILayout.BeginHorizontal();
             {
-                newId = EditorGUILayout.TextField("", newId, GUILayout.Width(Screen.width * .2f));
+                newId = EditorGUILayout.TextField("", newId, GUILayout.Width(Screen.width * .1f));
                 newWord = EditorGUILayout.TextArea(newWord, GUILayout.Width(Screen.width * .6f));
 
                 EditorGUI.BeginDisabledGroup(string.IsNullOrWhiteSpace(newId) || string.IsNullOrWhiteSpace(newWord) ||
@@ -153,8 +174,27 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
             }
             EditorGUILayout.EndHorizontal();
 
+            WordEditorErrorDisplay(newId, newWord);
+
+
             if (GUILayout.Button("Clear all Words"))
                 language.Clear();
+        }
+
+        /// <summary>
+        /// Shows some errors based on user input.
+        /// </summary>
+        /// <param name="id">The id the user is trying to enter.</param>
+        /// <param name="word">The word the user is trying to enter.</param>
+        /// <param name="existingId">If this is the same id as the currently editing,
+        /// we shouldn't display a warning.</param>
+        private void WordEditorErrorDisplay(string id, string word, string existingId = null)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                EditorGUILayout.HelpBox("Id can't be empty", MessageType.Error);
+            if (string.IsNullOrWhiteSpace(word)) EditorGUILayout.HelpBox("The word can't be empty", MessageType.Error);
+            if (language.ContainsWord(id) && id != existingId)
+                EditorGUILayout.HelpBox("This id already exists in the language", MessageType.Error);
         }
 
         /// <summary>

@@ -58,9 +58,8 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
                 JsonUtility.FromJsonOverwrite(jsonString, language);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Debug.Log(e);
                 return false;
             }
         }

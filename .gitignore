@@ -7,9 +7,6 @@ Temp/
 obj/
 Library/
 
-Packages/
-ProjectSettings/
-
 Assets/Data.meta
 Assets/Data/
 Assets/Plugins.meta
@@ -21,3 +18,17 @@ ScriptableCore.csproj
 ScriptableCoreEditor.csproj
 Assets/Scripts/Test.meta
 ScriptableBase.sln.DotSettings.user
+ProjectSettings/UnityConnectSettings.asset
+ProjectSettings/TimeManager.asset
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/EditorSettings.asset
+ProjectSettings/EditorBuildSettings.asset
+ProjectSettings/Physics2DSettings.asset
+ProjectSettings/NavMeshAreas.asset
+ProjectSettings/InputManager.asset
+ProjectSettings/DynamicsManager.asset
+ProjectSettings/ClusterInputManager.asset
+ProjectSettings/QualitySettings.asset
+ProjectSettings/PresetManager.asset
+ProjectSettings/TagManager.asset
+ProjectSettings/AudioManager.asset
