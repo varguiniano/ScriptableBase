@@ -18,19 +18,19 @@ namespace Varguiniano.ScriptableCore.Core
         /// Default is true so no null pointers are thrown if the designer forgets to assign a value.
         /// </summary>
         [SerializeField]
-        private bool UseConstant = true;
+        protected bool UseConstant = true;
 
         /// <summary>
         /// The constant to use instead of the scriptable.
         /// </summary>
         [SerializeField]
-        private T ConstantValue;
+        protected T ConstantValue;
 
         /// <summary>
         /// The variable that holds the data.
         /// </summary>
         [SerializeField]
-        private V Variable;
+        protected V Variable;
 
         /// <summary>
         /// Property to ease access to the data.
