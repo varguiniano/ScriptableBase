@@ -25,11 +25,16 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         {
             variable = (GameObjectVariable) target;
 
-            variable.Value =
-                (GameObject) EditorGUILayout.ObjectField("Value", variable.Value, typeof(GameObject), true);
+            EditorGUI.BeginChangeCheck();
+            {
+                variable.Value =
+                    (GameObject) EditorGUILayout.ObjectField("Value", variable.Value, typeof(GameObject), true);
 
-            variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                variable.OnValueChanged, typeof(GameEvent), false);
+                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    variable.OnValueChanged, typeof(GameEvent), false);
+            }
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(variable);
         }
     }
 }

@@ -11,4 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e126768140054cfabf866a839722962c, type: 3}
   m_Name: BoolSecondExample
   m_EditorClassIdentifier: 
-  OnValueChanged: {fileID: 0}
+  value: 0
+  OnValueChanged: {fileID: 11400000, guid: 4f3fa05718523e74ba25e3f9d3fce39d, type: 2}

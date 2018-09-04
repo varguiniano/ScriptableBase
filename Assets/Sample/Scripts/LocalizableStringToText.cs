@@ -10,7 +10,7 @@ namespace Sample
     /// Takes the value of a localized string and displays it on a text.
     /// </summary>
     [RequireComponent(typeof(Text))]
-    public class LocalizableStringToText : GameEventListener
+    public class LocalizableStringToText : CGameEventListener
     {
         /// <summary>
         /// Variable to take the value from.

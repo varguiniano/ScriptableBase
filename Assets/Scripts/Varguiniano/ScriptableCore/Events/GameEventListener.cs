@@ -1,37 +1,31 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Varguiniano.ScriptableCore.Events
 {
     /// <inheritdoc />
     /// <summary>
-    /// Behaviour that listens to a given Scriptable Object Event.
+    /// Game event listener that can be added as a component.
     /// </summary>
-    public abstract class GameEventListener : MonoBehaviour
+    public class GameEventListener : CGameEventListener
     {
         /// <summary>
         /// Event to listen to.
         /// </summary>
-        protected GameEvent GameEvent;
-        
-        /// <summary>
-        /// Actions to perform when the event is raised.
-        /// </summary>
-        protected UnityEvent Response = new UnityEvent();
+        [SerializeField] private GameEvent eventToListenTo;
 
         /// <summary>
-        /// Called when the event is raised.
+        /// Response to give.
         /// </summary>
-        public void EventRaised() => Response.Invoke();
+        [SerializeField] private UnityEvent responseToGive;
 
         /// <summary>
-        /// Registers to the event.
+        /// Assign references.
         /// </summary>
-        protected virtual void OnEnable() => GameEvent.RegisterListener(this);
-
-        /// <summary>
-        /// Unregisters from the event.
-        /// </summary>
-        protected virtual void OnDisable() => GameEvent.UnregisterListener(this);
+        private void Awake()
+        {
+            GameEvent = eventToListenTo;
+            Response = responseToGive;
+        }
     }
 }

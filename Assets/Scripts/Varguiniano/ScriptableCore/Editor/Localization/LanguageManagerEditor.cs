@@ -29,30 +29,36 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         public override void OnInspectorGUI()
         {
             manager = (LanguageManager) target;
-
-            if (manager.AllLanguages.Length > 1)
-                manager.CurrentLanguageId =
-                    EditorGUILayout.Popup("Current language", manager.CurrentLanguageId, manager.AllLanguages);
-            else
+            
+            EditorGUI.BeginChangeCheck();
             {
-                EditorGUI.BeginDisabledGroup(true);
+                if (manager.AllLanguages.Length > 1)
+                    manager.CurrentLanguageId = EditorGUILayout.Popup("Current language", manager.CurrentLanguageId,
+                        manager.AllLanguages);
+                else
                 {
-                    EditorGUILayout.LabelField("Current language", manager.CurrentLanguage);
+                    EditorGUI.BeginDisabledGroup(true);
+                    {
+                        EditorGUILayout.LabelField("Current language", manager.CurrentLanguage);
+                    }
+                    EditorGUI.EndDisabledGroup();
                 }
-                EditorGUI.EndDisabledGroup();
+
+                GUILayout.Space(30);
+
+                manager.OnLanguageChanged = (GameEvent) EditorGUILayout.ObjectField("On language changed event",
+                    manager.OnLanguageChanged, typeof(GameEvent), false);
+
+                GUILayout.Space(30);
+
+                if (manager.AllLanguages.Length > 0)
+                    QuickTranslate();
+
+                GUILayout.Space(30);
             }
-            
-            GUILayout.Space(30);
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(manager);
 
-            manager.OnLanguageChanged = (GameEvent) EditorGUILayout.ObjectField("On language changed event",
-                manager.OnLanguageChanged, typeof(GameEvent), false);
-            
-            GUILayout.Space(30);
-
-            QuickTranslate();
-            
-            GUILayout.Space(30);
-            
             DisplayLanguageArray();
         }
 

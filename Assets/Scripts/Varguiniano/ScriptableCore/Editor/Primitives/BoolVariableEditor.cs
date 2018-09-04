@@ -1,4 +1,5 @@
 using UnityEditor;
+using UnityEngine;
 using Varguiniano.ScriptableCore.Events;
 using Varguiniano.ScriptableCore.Primitives;
 
@@ -24,10 +25,15 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         {
             variable = (BoolVariable) target;
 
-            variable.Value = EditorGUILayout.Toggle("Value", variable.Value);
+            EditorGUI.BeginChangeCheck();
+            {
+                variable.Value = EditorGUILayout.Toggle("Value", variable.Value);
 
-            variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                variable.OnValueChanged, typeof(GameEvent), false);
+                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    variable.OnValueChanged, typeof(GameEvent), false);
+            }
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(variable);
         }
     }
 }

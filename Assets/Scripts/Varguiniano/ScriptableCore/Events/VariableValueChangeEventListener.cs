@@ -6,7 +6,7 @@ namespace Varguiniano.ScriptableCore.Events
     /// <summary>
     /// Class that listens to the OnValueChangeEvent of a given variable.
     /// </summary>
-    public abstract class VariableValueChangeEventListener<T> : GameEventListener
+    public abstract class VariableValueChangeEventListener<T> : CGameEventListener
     {
         /// <summary>
         /// Variable to listen to.
@@ -17,7 +17,7 @@ namespace Varguiniano.ScriptableCore.Events
         /// <summary>
         /// Register to the event.
         /// </summary>
-        protected override void OnEnable()
+        public override void OnEnable()
         {
             GameEvent = VariableToListen.OnValueChanged;
             base.OnEnable();
@@ -28,7 +28,7 @@ namespace Varguiniano.ScriptableCore.Events
         /// <summary>
         /// Unregister from the event.
         /// </summary>
-        protected override void OnDisable()
+        public override void OnDisable()
         {
             Response.RemoveListener(OnValueChanged);
             base.OnDisable();

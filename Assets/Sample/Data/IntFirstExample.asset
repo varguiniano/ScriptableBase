@@ -11,4 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe69832ea7d419cab81a6f5fc838848, type: 3}
   m_Name: IntFirstExample
   m_EditorClassIdentifier: 
-  Value: 3
+  value: 234
+  OnValueChanged: {fileID: 0}

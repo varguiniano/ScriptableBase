@@ -1,4 +1,5 @@
 using UnityEditor;
+using UnityEngine;
 using Varguiniano.ScriptableCore.DataStructures;
 using Varguiniano.ScriptableCore.Events;
 
@@ -24,10 +25,15 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         {
             variable = (Vector3Variable) target;
 
-            variable.Value = EditorGUILayout.Vector3Field("Value", variable.Value);
+            EditorGUI.BeginChangeCheck();
+            {
+                variable.Value = EditorGUILayout.Vector3Field("Value", variable.Value);
 
-            variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                variable.OnValueChanged, typeof(GameEvent), false);
+                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    variable.OnValueChanged, typeof(GameEvent), false);
+            }
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(variable);
         }
     }
 }

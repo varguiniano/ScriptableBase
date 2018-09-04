@@ -11,5 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a83b71a89ae40a99951d5a0e87374bb, type: 3}
   m_Name: LocalizableStringThirdExample
   m_EditorClassIdentifier: 
-  OnValueChanged: {fileID: 0}
-  LanguageManager: {fileID: 0}
+  value: another_example
+  OnValueChanged: {fileID: 11400000, guid: 2fba9b116aa2f15449d6f2e17054cb96, type: 2}
+  LanguageManager: {fileID: 11400000, guid: 2cf85ba01de7c99439b50084ac5673de, type: 2}

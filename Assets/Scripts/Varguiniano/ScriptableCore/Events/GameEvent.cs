@@ -13,19 +13,19 @@ namespace Varguiniano.ScriptableCore.Events
         /// <summary>
         /// Listeners of the event.
         /// </summary>
-        private readonly HashSet<GameEventListener> listeners = new HashSet<GameEventListener>();
+        private readonly HashSet<IGameEventListener> listeners = new HashSet<IGameEventListener>();
 
         /// <summary>
         /// Registers a listener to the event.
         /// </summary>
         /// <param name="listener">The listener to register.</param>
-        public void RegisterListener(GameEventListener listener) => listeners.Add(listener);
+        public void RegisterListener(IGameEventListener listener) => listeners.Add(listener);
 
         /// <summary>
         /// Unregisters an listener from the event.
         /// </summary>
         /// <param name="listener">The listener to remove.</param>
-        public void UnregisterListener(GameEventListener listener)
+        public void UnregisterListener(IGameEventListener listener)
         {
             if (listeners.Contains(listener)) listeners.Remove(listener);
         }

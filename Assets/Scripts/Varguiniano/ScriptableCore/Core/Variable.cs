@@ -28,6 +28,7 @@ namespace Varguiniano.ScriptableCore.Core
         /// <summary>
         /// Backfield for Value.
         /// </summary>
+        [SerializeField]
         private T value;
 
         /// <summary>
