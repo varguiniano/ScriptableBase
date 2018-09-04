@@ -52,7 +52,7 @@ namespace Varguiniano.ScriptableCore.Core
     }
     
     /// <summary>
-    /// Non generic class to be inherited by the actual usefull class.
+    /// Non generic class to be inherited by the actual useful class.
     /// This non generic class is necessary for the property drawer to work.
     /// </summary>
     [Serializable]

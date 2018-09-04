@@ -1,24 +1,19 @@
-.idea/
+# Assemblies and stuff
 ScriptableBase.sln
-Assembly-CSharp-Editor-firstpass.csproj
-Assembly-CSharp-Editor.csproj
 Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp-Editor-firstpass.csproj
+ScriptableCore.csproj
+ScriptableCoreEditor.csproj
+Sample.csproj
+ScriptableBase.sln.DotSettings.user
+
+# Unity
 Temp/
 obj/
 Library/
 
-Assets/Data.meta
-Assets/Data/
-Assets/Plugins.meta
-Assets/Plugins/
-Assets/Scenes.meta
-Assets/Scenes/
-Assets/Scripts/Test/
-ScriptableCore.csproj
-ScriptableCoreEditor.csproj
-Sample.csproj
-Assets/Scripts/Test.meta
-ScriptableBase.sln.DotSettings.user
+# Unchanged project settings
 ProjectSettings/UnityConnectSettings.asset
 ProjectSettings/TimeManager.asset
 ProjectSettings/GraphicsSettings.asset
@@ -34,3 +29,10 @@ ProjectSettings/PresetManager.asset
 ProjectSettings/TagManager.asset
 ProjectSettings/AudioManager.asset
 ProjectSettings/NetworkManager.asset
+
+# Rider
+.idea/
+Assets/Plugins.meta
+Assets/Plugins/
+
+

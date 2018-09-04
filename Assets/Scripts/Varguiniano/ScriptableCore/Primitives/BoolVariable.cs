@@ -9,7 +9,7 @@ namespace Varguiniano.ScriptableCore.Primitives
     /// Scriptable object that holds a bool.
     /// </summary>
     [CreateAssetMenu(menuName = "Scriptable Core/Bool")]
-    public class BoolVariable : Variable<float>
+    public class BoolVariable : Variable<bool>
     {
     }
 
@@ -18,7 +18,7 @@ namespace Varguiniano.ScriptableCore.Primitives
     /// Reference to the BoolVariable.
     /// </summary>
     [Serializable]
-    public class BoolReference : Reference<float, BoolVariable>
+    public class BoolReference : Reference<bool, BoolVariable>
     {
     }
 }

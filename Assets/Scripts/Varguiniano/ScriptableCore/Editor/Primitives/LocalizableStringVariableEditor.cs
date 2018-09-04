@@ -1,4 +1,5 @@
 using UnityEditor;
+using Varguiniano.ScriptableCore.Events;
 using Varguiniano.ScriptableCore.Localization;
 using Varguiniano.ScriptableCore.Primitives;
 
@@ -15,7 +16,7 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         /// Reference to the variable being edited.
         /// </summary>
         private LocalizableStringVariable variable;
-        
+
         /// <inheritdoc />
         /// <summary>
         /// GUI display.
@@ -24,8 +25,8 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         {
             variable = (LocalizableStringVariable) target;
 
-            variable.LanguageManager = (LanguageManager)EditorGUILayout.ObjectField("Language manager", variable.LanguageManager,
-                typeof(LanguageManager), false);
+            variable.LanguageManager = (LanguageManager) EditorGUILayout.ObjectField("Language manager",
+                variable.LanguageManager, typeof(LanguageManager), false);
 
             variable.Value = EditorGUILayout.TextField("Value", variable.Value);
             EditorGUI.BeginDisabledGroup(true);
@@ -33,6 +34,9 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
                 EditorGUILayout.TextField("Localized value", variable.LocalizedValue);
             }
             EditorGUI.EndDisabledGroup();
+
+            variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                variable.OnValueChanged, typeof(GameEvent), false);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Sample
 
         /// <summary>
         /// Takes the value from the variable and displays it.
+        /// THIS IS INEFFICIENT! We shouldn't be refreshing the text each frame.
         /// </summary>
         private void Update() => text.text = variable.Value.ToString();
     }

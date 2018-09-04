@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using Varguiniano.ScriptableCore.Events;
 
 namespace Varguiniano.ScriptableCore.Localization
 {
@@ -13,7 +13,26 @@ namespace Varguiniano.ScriptableCore.Localization
         /// <summary>
         /// Currently loaded language.
         /// </summary>
-        public int CurrentLanguageId;
+        public int CurrentLanguageId
+        {
+            get { return currentLanguageId; }
+            set
+            {
+                currentLanguageId = value;
+                if(OnLanguageChanged)
+                    OnLanguageChanged.Raise();
+            }
+        }
+
+        /// <summary>
+        /// Backfield for CurrentLanguageId.
+        /// </summary>
+        private int currentLanguageId;
+
+        /// <summary>
+        /// Event raised when the language is changed.
+        /// </summary>
+        public GameEvent OnLanguageChanged;
 
         /// <summary>
         /// Public accessor for the current language id.
@@ -45,23 +64,5 @@ namespace Varguiniano.ScriptableCore.Localization
         /// </summary>
         /// <param name="wordId"></param>
         public string this[string wordId] => languages[CurrentLanguageId][wordId];
-
-        /// <summary>
-        /// Changes to the given language.
-        /// </summary>
-        /// <param name="id">The language to change to.</param>
-        /// <returns>True if the language was changed.</returns>
-        public bool ChangeLanguage(string id)
-        {
-            for (var index = 0; index < languages.Length; index++)
-            {
-                var language = languages[index];
-                if (language.LanguageId != id) continue;
-                CurrentLanguageId = index;
-                return true;
-            }
-
-            return false;
-        }
     }
 }

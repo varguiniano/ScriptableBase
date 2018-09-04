@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using Varguiniano.ScriptableCore.Events;
 using Varguiniano.ScriptableCore.Localization;
 
 namespace Varguiniano.ScriptableCore.Editor.Localization
@@ -43,11 +44,16 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
             
             GUILayout.Space(30);
 
-            DisplayLanguageArray();
+            manager.OnLanguageChanged = (GameEvent) EditorGUILayout.ObjectField("On language changed event",
+                manager.OnLanguageChanged, typeof(GameEvent), false);
+            
+            GUILayout.Space(30);
+
+            QuickTranslate();
             
             GUILayout.Space(30);
             
-            QuickTranslate();
+            DisplayLanguageArray();
         }
 
         /// <summary>
