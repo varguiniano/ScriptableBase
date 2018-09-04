@@ -9,7 +9,7 @@ namespace Sample
     /// Class that gets the int input from an input field and stores it on a variable.
     /// </summary>
     [RequireComponent(typeof(InputField))]
-    public class InputIntVariable : MonoBehaviour
+    public class InputToIntVariable : MonoBehaviour
     {
         /// <summary>
         /// Variable to save the int to.

@@ -7,33 +7,31 @@ namespace Varguiniano.ScriptableCore.Events
     /// <summary>
     /// Behaviour that listens to a given Scriptable Object Event.
     /// </summary>
-    public class GameEventListener : MonoBehaviour
+    public abstract class GameEventListener : MonoBehaviour
     {
         /// <summary>
         /// Event to listen to.
         /// </summary>
-        [SerializeField]
-        private GameEvent gameEvent;
+        protected GameEvent GameEvent;
         
         /// <summary>
         /// Actions to perform when the event is raised.
         /// </summary>
-        [SerializeField]
-        private UnityEvent response;
+        protected UnityEvent Response = new UnityEvent();
 
         /// <summary>
         /// Called when the event is raised.
         /// </summary>
-        public void EventRaised() => response.Invoke();
+        public void EventRaised() => Response.Invoke();
 
         /// <summary>
         /// Registers to the event.
         /// </summary>
-        private void OnEnable() => gameEvent.RegisterListener(this);
+        protected virtual void OnEnable() => GameEvent.RegisterListener(this);
 
         /// <summary>
         /// Unregisters from the event.
         /// </summary>
-        private void OnDisable() => gameEvent.UnregisterListener(this);
+        protected virtual void OnDisable() => GameEvent.UnregisterListener(this);
     }
 }
