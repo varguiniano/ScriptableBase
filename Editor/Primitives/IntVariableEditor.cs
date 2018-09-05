@@ -15,7 +15,7 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         /// <summary>
         /// Reference to the variable being edited.
         /// </summary>
-        private IntVariable variable;
+        private IntVariable Variable => (IntVariable) target;
 
         /// <inheritdoc />
         /// <summary>
@@ -23,17 +23,15 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         /// </summary>
         public override void OnInspectorGUI()
         {
-            variable = (IntVariable) target;
-
             EditorGUI.BeginChangeCheck();
             {
-                variable.Value = EditorGUILayout.IntField("Value", variable.Value);
+                Variable.Value = EditorGUILayout.IntField("Value", Variable.Value);
 
-                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                    variable.OnValueChanged, typeof(GameEvent), false);
+                Variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    Variable.OnValueChanged, typeof(GameEvent), false);
             }
             if (EditorGUI.EndChangeCheck())
-                EditorUtility.SetDirty(variable);
+                EditorUtility.SetDirty(Variable);
         }
     }
 }

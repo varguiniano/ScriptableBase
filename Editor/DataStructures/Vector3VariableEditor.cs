@@ -1,5 +1,4 @@
 using UnityEditor;
-using UnityEngine;
 using Varguiniano.ScriptableCore.DataStructures;
 using Varguiniano.ScriptableCore.Events;
 
@@ -15,7 +14,7 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         /// <summary>
         /// Reference to the variable being edited.
         /// </summary>
-        private Vector3Variable variable;
+        private Vector3Variable Variable => (Vector3Variable) target;
 
         /// <inheritdoc />
         /// <summary>
@@ -23,17 +22,15 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         /// </summary>
         public override void OnInspectorGUI()
         {
-            variable = (Vector3Variable) target;
-
             EditorGUI.BeginChangeCheck();
             {
-                variable.Value = EditorGUILayout.Vector3Field("Value", variable.Value);
+                Variable.Value = EditorGUILayout.Vector3Field("Value", Variable.Value);
 
-                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                    variable.OnValueChanged, typeof(GameEvent), false);
+                Variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    Variable.OnValueChanged, typeof(GameEvent), false);
             }
             if (EditorGUI.EndChangeCheck())
-                EditorUtility.SetDirty(variable);
+                EditorUtility.SetDirty(Variable);
         }
     }
 }

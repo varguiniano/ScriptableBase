@@ -16,7 +16,7 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         /// <summary>
         /// Reference to the variable being edited.
         /// </summary>
-        private LocalizableStringVariable variable;
+        private LocalizableStringVariable Variable => (LocalizableStringVariable) target;
 
         /// <inheritdoc />
         /// <summary>
@@ -24,25 +24,23 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         /// </summary>
         public override void OnInspectorGUI()
         {
-            variable = (LocalizableStringVariable) target;
-
             EditorGUI.BeginChangeCheck();
             {
-                variable.LanguageManager = (LanguageManager) EditorGUILayout.ObjectField("Language manager",
-                    variable.LanguageManager, typeof(LanguageManager), false);
+                Variable.LanguageManager = (LanguageManager) EditorGUILayout.ObjectField("Language manager",
+                    Variable.LanguageManager, typeof(LanguageManager), false);
 
-                variable.Value = EditorGUILayout.TextField("Value", variable.Value);
+                Variable.Value = EditorGUILayout.TextField("Value", Variable.Value);
                 EditorGUI.BeginDisabledGroup(true);
                 {
-                    EditorGUILayout.TextField("Localized value", variable.LocalizedValue);
+                    EditorGUILayout.TextField("Localized value", Variable.LocalizedValue);
                 }
                 EditorGUI.EndDisabledGroup();
 
-                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                    variable.OnValueChanged, typeof(GameEvent), false);
+                Variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    Variable.OnValueChanged, typeof(GameEvent), false);
             }
             if (EditorGUI.EndChangeCheck())
-                EditorUtility.SetDirty(variable);
+                EditorUtility.SetDirty(Variable);
         }
     }
 }

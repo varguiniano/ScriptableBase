@@ -53,8 +53,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         /// </summary>
         public override void OnInspectorGUI()
         {
-            language = (Language) target;
-
+            if (language != null) language = (Language) target;
             if (editableList == null) GetEditableCopy();
 
             language.LanguageId = EditorGUILayout.TextField("Language ID", language.LanguageId);
