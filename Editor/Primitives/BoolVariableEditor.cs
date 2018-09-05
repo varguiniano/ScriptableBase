@@ -15,7 +15,7 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         /// <summary>
         /// Reference to the variable being edited.
         /// </summary>
-        private BoolVariable variable;
+        private BoolVariable Variable => (BoolVariable) target;
 
         /// <inheritdoc />
         /// <summary>
@@ -23,17 +23,15 @@ namespace Varguiniano.ScriptableCore.Editor.Primitives
         /// </summary>
         public override void OnInspectorGUI()
         {
-            variable = (BoolVariable) target;
-
             EditorGUI.BeginChangeCheck();
             {
-                variable.Value = EditorGUILayout.Toggle("Value", variable.Value);
+                Variable.Value = EditorGUILayout.Toggle("Value", Variable.Value);
 
-                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                    variable.OnValueChanged, typeof(GameEvent), false);
+                Variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    Variable.OnValueChanged, typeof(GameEvent), false);
             }
             if (EditorGUI.EndChangeCheck())
-                EditorUtility.SetDirty(variable);
+                EditorUtility.SetDirty(Variable);
         }
     }
 }
