@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Varguiniano.ScriptableCore.Events
 {
@@ -13,19 +14,34 @@ namespace Varguiniano.ScriptableCore.Events
         /// <summary>
         /// Listeners of the event.
         /// </summary>
-        private readonly HashSet<IGameEventListener> listeners = new HashSet<IGameEventListener>();
+        private readonly HashSet<UnityEvent> listeners = new HashSet<UnityEvent>();
 
         /// <summary>
         /// Registers a listener to the event.
         /// </summary>
         /// <param name="listener">The listener to register.</param>
-        public void RegisterListener(IGameEventListener listener) => listeners.Add(listener);
+        public void RegisterListener(CGameEventListener listener) => listeners.Add(listener.Response);
+        
+        /// <summary>
+        /// Registers a listener to the event.
+        /// </summary>
+        /// <param name="listener">The listener to register.</param>
+        public void RegisterListener(UnityEvent listener) => listeners.Add(listener);
 
         /// <summary>
         /// Unregisters an listener from the event.
         /// </summary>
         /// <param name="listener">The listener to remove.</param>
-        public void UnregisterListener(IGameEventListener listener)
+        public void UnregisterListener(CGameEventListener listener)
+        {
+            if (listeners.Contains(listener.Response)) listeners.Remove(listener.Response);
+        }
+        
+        /// <summary>
+        /// Unregisters an listener from the event.
+        /// </summary>
+        /// <param name="listener">The listener to remove.</param>
+        public void UnregisterListener(UnityEvent listener)
         {
             if (listeners.Contains(listener)) listeners.Remove(listener);
         }
@@ -35,7 +51,7 @@ namespace Varguiniano.ScriptableCore.Events
         /// </summary>
         public void Raise()
         {
-            foreach (var listener in listeners) listener.EventRaised();
+            foreach (var response in listeners) response?.Invoke();
         }
     }
 }

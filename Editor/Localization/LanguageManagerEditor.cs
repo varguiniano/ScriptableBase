@@ -15,7 +15,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         /// <summary>
         /// Reference to the language manager being edited.
         /// </summary>
-        private LanguageManager Manager => (LanguageManager) target;
+        private LanguageManager manager;
 
         /// <summary>
         /// Id to look for in the quick translate field.
@@ -28,34 +28,36 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
         /// </summary>
         public override void OnInspectorGUI()
         {
+            manager = (LanguageManager) target;
+            
             EditorGUI.BeginChangeCheck();
             {
-                if (Manager.AllLanguages.Length > 1)
-                    Manager.CurrentLanguageId = EditorGUILayout.Popup("Current language", Manager.CurrentLanguageId,
-                        Manager.AllLanguages);
+                if (manager.AllLanguages.Length > 1)
+                    manager.CurrentLanguageId = EditorGUILayout.Popup("Current language", manager.CurrentLanguageId,
+                        manager.AllLanguages);
                 else
                 {
                     EditorGUI.BeginDisabledGroup(true);
                     {
-                        EditorGUILayout.LabelField("Current language", Manager.CurrentLanguage);
+                        EditorGUILayout.LabelField("Current language", manager.CurrentLanguage);
                     }
                     EditorGUI.EndDisabledGroup();
                 }
 
                 GUILayout.Space(30);
 
-                Manager.OnLanguageChanged = (GameEvent) EditorGUILayout.ObjectField("On language changed event",
-                    Manager.OnLanguageChanged, typeof(GameEvent), false);
+                manager.OnLanguageChanged = (GameEvent) EditorGUILayout.ObjectField("On language changed event",
+                    manager.OnLanguageChanged, typeof(GameEvent), false);
 
                 GUILayout.Space(30);
 
-                if (Manager.AllLanguages.Length > 0)
+                if (manager.AllLanguages.Length > 0)
                     QuickTranslate();
 
                 GUILayout.Space(30);
             }
             if (EditorGUI.EndChangeCheck())
-                EditorUtility.SetDirty(Manager);
+                EditorUtility.SetDirty(manager);
 
             DisplayLanguageArray();
         }
@@ -80,7 +82,7 @@ namespace Varguiniano.ScriptableCore.Editor.Localization
             GUILayout.BeginHorizontal();
             {
                 quickId = EditorGUILayout.TextField("Quick translate", quickId);
-                GUILayout.TextField(Manager[quickId]);
+                GUILayout.TextField(manager[quickId]);
             }
             GUILayout.EndHorizontal();
         }

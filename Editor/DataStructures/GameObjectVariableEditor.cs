@@ -15,7 +15,7 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         /// <summary>
         /// Reference to the variable being edited.
         /// </summary>
-        private GameObjectVariable Variable => (GameObjectVariable) target;
+        private GameObjectVariable variable;
 
         /// <inheritdoc />
         /// <summary>
@@ -23,16 +23,18 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         /// </summary>
         public override void OnInspectorGUI()
         {
+            variable = (GameObjectVariable) target;
+
             EditorGUI.BeginChangeCheck();
             {
-                Variable.Value =
-                    (GameObject) EditorGUILayout.ObjectField("Value", Variable.Value, typeof(GameObject), true);
+                variable.Value =
+                    (GameObject) EditorGUILayout.ObjectField("Value", variable.Value, typeof(GameObject), true);
 
-                Variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
-                    Variable.OnValueChanged, typeof(GameEvent), false);
+                variable.OnValueChanged = (GameEvent) EditorGUILayout.ObjectField("On value changed event",
+                    variable.OnValueChanged, typeof(GameEvent), false);
             }
             if (EditorGUI.EndChangeCheck())
-                EditorUtility.SetDirty(Variable);
+                EditorUtility.SetDirty(variable);
         }
     }
 }
