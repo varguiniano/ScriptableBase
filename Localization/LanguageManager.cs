@@ -38,7 +38,7 @@ namespace Varguiniano.ScriptableCore.Localization
         /// Public accessor for the current language id.
         /// </summary>
         public string CurrentLanguage =>
-            languages.Length > 0 ? languages[CurrentLanguageId].LanguageId : "No languages";
+            languages != null && languages.Length > 0 ? languages[CurrentLanguageId].LanguageId : "No languages";
 
         /// <summary>
         /// Returns an array of all the languages' names.
@@ -47,6 +47,7 @@ namespace Varguiniano.ScriptableCore.Localization
         {
             get
             {
+                if(languages == null) return new string[]{};
                 var result = new string[languages.Length];
                 for (var index = 0; index < languages.Length; index++) result[index] = languages[index].LanguageId;
 
