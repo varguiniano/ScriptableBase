@@ -25,7 +25,7 @@ namespace Varguiniano.ScriptableCore.Editor.Core
         /// <param name="serializedObject">The serialized object to look into.</param>
         /// <param name="name">Name of that property.</param>
         /// <param name="includeChildren">Should it include children?</param>
-        protected static void PaintProperty(SerializedObject serializedObject, string name,
+        public static void PaintProperty(SerializedObject serializedObject, string name,
             bool includeChildren = false)
         {
             var property = serializedObject.FindProperty(name);
