@@ -30,7 +30,7 @@ namespace Varguiniano.ScriptableCore.Core
         /// The variable that holds the data.
         /// </summary>
         [SerializeField]
-        protected V Variable;
+        public V Variable;
 
         /// <summary>
         /// Property to ease access to the data.
