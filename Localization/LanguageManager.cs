@@ -64,6 +64,6 @@ namespace Varguiniano.ScriptableCore.Localization
         /// Returns the word for the given id in the current language.
         /// </summary>
         /// <param name="wordId"></param>
-        public string this[string wordId] => languages[CurrentLanguageId][wordId];
+        public string this[string wordId] => languages.Length > 0 ? languages[CurrentLanguageId][wordId] : wordId;
     }
 }
