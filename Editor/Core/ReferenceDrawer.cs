@@ -10,6 +10,7 @@ namespace Varguiniano.ScriptableCore.Editor.Core
     /// This will show the reference in one line, allowing to choose between variable and object.
     /// </summary>
     [CustomPropertyDrawer(typeof(Reference), true)]
+    [CustomPropertyDrawer(typeof(NonPersistentReference), true)]
     public class ReferenceDrawer : PropertyDrawer
     {
         /// <summary>
@@ -38,7 +39,7 @@ namespace Varguiniano.ScriptableCore.Editor.Core
             position = EditorGUI.PrefixLabel(position, label);
 
             EditorGUI.BeginChangeCheck();
-            
+
             var useConstant = property.FindPropertyRelative("UseConstant");
             var constantValue = property.FindPropertyRelative("ConstantValue");
             var variable = property.FindPropertyRelative("Variable");

@@ -9,7 +9,7 @@ namespace Varguiniano.ScriptableCore.DataStructures
     /// Scriptable object that holds a Texture2D.
     /// </summary>
     [CreateAssetMenu(menuName = "Scriptable Core/Texture2D")]
-    public class Texture2DVariable : Variable<Texture2D>
+    public class Texture2DVariable : NonPersistentVariable<Texture2D>
     {
     }
 
@@ -18,7 +18,7 @@ namespace Varguiniano.ScriptableCore.DataStructures
     /// Reference to the Texture2DVariable.
     /// </summary>
     [Serializable]
-    public class Texture2DReference : Reference<Texture2D, Texture2DVariable>
+    public class Texture2DReference : NonPersistentReference<Texture2D, Texture2DVariable>
     {
     }
 }

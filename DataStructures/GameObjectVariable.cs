@@ -9,7 +9,7 @@ namespace Varguiniano.ScriptableCore.DataStructures
     /// Scriptable object that holds a GameObject.
     /// </summary>
     [CreateAssetMenu(menuName = "Scriptable Core/Game Object")]
-    public class GameObjectVariable : Variable<GameObject>
+    public class GameObjectVariable : NonPersistentVariable<GameObject>
     {
     }
 
@@ -18,7 +18,7 @@ namespace Varguiniano.ScriptableCore.DataStructures
     /// Reference to the GameObjectVariable.
     /// </summary>
     [Serializable]
-    public class GameObjectReference : Reference<GameObject, GameObjectVariable>
+    public class GameObjectReference : NonPersistentReference<GameObject, GameObjectVariable>
     {
     }
 }

@@ -11,7 +11,7 @@ namespace Varguiniano.ScriptableCore.Primitives
     /// Localizable string scriptable variable.
     /// </summary>
     [CreateAssetMenu(menuName = "Scriptable Core/Localizable String")]
-    public class LocalizableStringVariable : Variable<string>
+    public class LocalizableStringVariable : NonPersistentVariable<string>
     {
         /// <summary>
         /// Reference to the language manager scriptable object.
@@ -29,7 +29,7 @@ namespace Varguiniano.ScriptableCore.Primitives
     /// Reference to the StringVariable.
     /// </summary>
     [Serializable]
-    public class LocalizableStringReference : Reference<string, LocalizableStringVariable>
+    public class LocalizableStringReference : NonPersistentReference<string, LocalizableStringVariable>
     {
         /// <summary>
         /// Returns the localized value of the string if able.
