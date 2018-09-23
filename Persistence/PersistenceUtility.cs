@@ -33,7 +33,7 @@ namespace Varguiniano.ScriptableCore.Persistence
         /// <param name="persisterName">Meta name to give to those files for identification.</param>
         /// <param name="objectsToPersist">List of objects to persist.</param>
         /// <returns>True if it was successful.</returns>
-        private static bool SaveToFiles(string persisterName, List<PersistentScriptableObject> objectsToPersist)
+        private static bool SaveToFiles(string persisterName, IReadOnlyList<PersistentScriptableObject> objectsToPersist)
         {
             var path = Application.persistentDataPath + "\\" + persisterName;
             

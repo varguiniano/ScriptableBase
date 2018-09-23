@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using Varguiniano.ScriptableCore.DataStructures;
 
 namespace Varguiniano.ScriptableCore.Editor.DataStructures
 {

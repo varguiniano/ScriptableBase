@@ -1,6 +1,6 @@
 using Varguiniano.ScriptableCore.Core;
 
-namespace Varguiniano.ScriptableCore.Events
+namespace Varguiniano.ScriptableCore.Events.Listeners
 {
     /// <inheritdoc />
     /// <summary>

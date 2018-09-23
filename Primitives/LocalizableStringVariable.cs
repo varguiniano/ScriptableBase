@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Varguiniano.ScriptableCore.Core;
 using Varguiniano.ScriptableCore.Localization;
 

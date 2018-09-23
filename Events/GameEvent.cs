@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Varguiniano.ScriptableCore.Events.Listeners;
 
 namespace Varguiniano.ScriptableCore.Events
 {

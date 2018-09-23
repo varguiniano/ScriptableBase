@@ -1,7 +1,8 @@
 using System;
+using System.Globalization;
 using UnityEngine;
 
-namespace Varguiniano.ScriptableCore.Editor.DataStructures
+namespace Varguiniano.ScriptableCore.DataStructures
 {
     /// <summary>
     /// Serializable Datetime object.
@@ -25,20 +26,20 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         /// </summary>
         /// <param name="udt">Unity datetime.</param>
         /// <returns>C# datetime.</returns>
-        public static implicit operator DateTime(UDateTime udt) => (udt.DateTime);
+        public static implicit operator DateTime(UDateTime udt) => udt.DateTime;
 
         /// <summary>
         /// Operator for parsing.
         /// </summary>
         /// <param name="dt">C# datetime.</param>
         /// <returns>Unity datetime.</returns>
-        public static implicit operator UDateTime(DateTime dt) => new UDateTime() {DateTime = dt};
+        public static implicit operator UDateTime(DateTime dt) => new UDateTime {DateTime = dt};
 
         /// <inheritdoc />
         /// <summary>
         /// Called before serialization.
         /// </summary>
-        public void OnBeforeSerialize() => dateTime = DateTime.ToString();
+        public void OnBeforeSerialize() => dateTime = DateTime.ToString(CultureInfo.InvariantCulture);
         
         /// <inheritdoc />
         /// <summary>

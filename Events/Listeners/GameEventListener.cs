@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Varguiniano.ScriptableCore.Events
+namespace Varguiniano.ScriptableCore.Events.Listeners
 {
     /// <inheritdoc />
     /// <summary>

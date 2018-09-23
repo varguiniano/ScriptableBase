@@ -1,5 +1,4 @@
 using UnityEditor;
-using UnityEngine;
 using Varguiniano.ScriptableCore.Events;
 using Varguiniano.ScriptableCore.Localization;
 using Varguiniano.ScriptableCore.Primitives;
