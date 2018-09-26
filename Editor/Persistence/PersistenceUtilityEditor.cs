@@ -58,7 +58,6 @@ namespace Varguiniano.ScriptableCore.Editor.Persistence
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
             EditorUtility.SetDirty(Utility);
-            AssetDatabase.SaveAssets();
         }
 
         /// <summary>
