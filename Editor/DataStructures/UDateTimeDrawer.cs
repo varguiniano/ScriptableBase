@@ -13,16 +13,6 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
     [CustomPropertyDrawer(typeof(UDateTime))]
     public class UDateTimeDrawer : PropertyDrawer
     {
-        /// <summary>
-        /// The year value.
-        /// </summary>
-        private int year;
-
-        /// <summary>
-        /// The month value.
-        /// </summary>
-        private int month = 1;
-
         /// <inheritdoc />
         /// <summary>
         /// Paint UI.
@@ -41,9 +31,7 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
                     var indent = EditorGUI.indentLevel;
                     EditorGUI.indentLevel = 0;
 
-                    SerializedString(position, property);
-
-                    // Selectors(position, property); 
+                    SeparateFields(position, property);
 
                     EditorGUI.indentLevel = indent;
                 }
@@ -61,11 +49,53 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         /// </summary>
         /// <param name="position">Drawer position.</param>
         /// <param name="property">Drawer property.</param>
-        [Obsolete("The selectors should be used instead.")]
+        [Obsolete]
         private void SerializedString(Rect position, SerializedProperty property)
         {
             var amountRect = new Rect(position.x, position.y, position.width, position.height);
-            EditorGUI.PropertyField(amountRect, property.FindPropertyRelative("dateTime"), GUIContent.none);
+            EditorGUI.PropertyField(amountRect, property.FindPropertyRelative("DateTimeString"), GUIContent.none);
+        }
+
+        /// <summary>
+        /// My own way, with separate fields for each value.
+        /// </summary>
+        /// <param name="position">Drawer position.</param>
+        /// <param name="property">Drawer property.</param>
+        private void SeparateFields(Rect position, SerializedProperty property)
+        {
+            var dateTime = (UDateTime) fieldInfo.GetValue(property.serializedObject.targetObject);
+
+            var amountRect = new Rect(position.x, position.y, 50, position.height);
+            dateTime.Year = EditorGUI.IntField(amountRect, dateTime.Year);
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 10, position.height);
+            EditorGUI.LabelField(amountRect, "/");
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 25, position.height);
+            dateTime.Month = EditorGUI.IntField(amountRect, dateTime.Month);
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 10, position.height);
+            EditorGUI.LabelField(amountRect, "/");
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 25, position.height);
+            dateTime.Day = EditorGUI.IntField(amountRect, dateTime.Day);
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width + 10, position.y, 25, position.height);
+            dateTime.Hour = EditorGUI.IntField(amountRect, dateTime.Hour);
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 10, position.height);
+            EditorGUI.LabelField(amountRect, ":");
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 25, position.height);
+            dateTime.Minute = EditorGUI.IntField(amountRect, dateTime.Minute);
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 10, position.height);
+            EditorGUI.LabelField(amountRect, ":");
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 25, position.height);
+            dateTime.Second = EditorGUI.IntField(amountRect, dateTime.Second);
+
+            property.FindPropertyRelative("DateTimeString").stringValue = dateTime.DateTimeString;
         }
 
         /// <summary>
@@ -75,16 +105,28 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
         /// <param name="property">Drawer property.</param>
         private void Selectors(Rect position, SerializedProperty property)
         {
-            var dateTime = property.FindPropertyRelative("dateTime");
+            var dateTime = (UDateTime) fieldInfo.GetValue(property.serializedObject.targetObject);
 
-            var amountRect = new Rect(position.x, position.y, 50, position.height);
-            year = EditorGUI.IntField(amountRect, year);
-            year = Mathf.Clamp(year, 1000, 3000);
+            var amountRect = new Rect(position.x, position.y, 35, position.height);
+            dateTime.Year = EditorGUI.IntField(amountRect, dateTime.Year);
 
-            amountRect = new Rect(position.x + amountRect.width, position.y, 50, position.height);
-            month = EditorGUI.Popup(amountRect, month - 1, GetMonthOptions()) + 1;
+            amountRect = new Rect(position.x + amountRect.width, position.y, 73, position.height);
+            dateTime.Month = EditorGUI.Popup(amountRect, dateTime.Month - 1, GetMonthOptions()) + 1;
 
-            var newDateTime = new DateTime(year, month, 1);
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 33, position.height);
+            dateTime.Day = EditorGUI.Popup(amountRect, dateTime.Day - 1,
+                               GetNumberOptions(1, DateTime.DaysInMonth(dateTime.Year, dateTime.Month))) + 1;
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width + 10, position.y, 33, position.height);
+            dateTime.Hour = EditorGUI.Popup(amountRect, dateTime.Hour, GetNumberOptions(0, 23));
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 33, position.height);
+            dateTime.Minute = EditorGUI.Popup(amountRect, dateTime.Minute, GetNumberOptions(0, 59));
+
+            amountRect = new Rect(amountRect.position.x + amountRect.width, position.y, 33, position.height);
+            dateTime.Second = EditorGUI.Popup(amountRect, dateTime.Second, GetNumberOptions(0, 59));
+
+            property.FindPropertyRelative("DateTimeString").stringValue = dateTime.DateTimeString;
         }
 
         /// <summary>
@@ -97,5 +139,18 @@ namespace Varguiniano.ScriptableCore.Editor.DataStructures
                 "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                 "November", "December"
             };
+
+        /// <summary>
+        /// Creates a list of numbers to be used in popup options.
+        /// </summary>
+        /// <param name="start">The starting number.</param>
+        /// <param name="end">The ending number.</param>
+        /// <returns>A list of number in strings.</returns>
+        private static string[] GetNumberOptions(int start, int end)
+        {
+            var list = new string[end - start + 1];
+            for (var i = start; i <= end; i++) list[i - start] = i.ToString();
+            return list;
+        }
     }
 }
