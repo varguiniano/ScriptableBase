@@ -74,6 +74,8 @@ namespace Varguiniano.ScriptableCore.Persistence
         {
             var path = Application.persistentDataPath + "\\" + persisterName;
 
+            if (!Directory.Exists(path)) return false;
+
             try
             {
                 for (var i = 0; i < ObjectsToPersist.Count; i++)
@@ -81,7 +83,7 @@ namespace Varguiniano.ScriptableCore.Persistence
                         ObjectsToPersist[i]
                             .LoadFromPersistentJson(File.ReadAllText(path + $"/{persisterName}_{i}.pso"));
                     else
-                        Debug.LogWarning(path + $"/{persisterName}_{i}.pso wasn't found! There may be data loss");
+                        Debug.LogWarning(path + $"/{persisterName}_{i}.pso wasn't found! There may be data loss.");
                 return true;
             }
             catch (Exception e)
